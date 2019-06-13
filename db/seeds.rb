@@ -30,6 +30,7 @@ AnimalKind.create([
 	{ kind: "Lhama"},
 	{ kind: "Iguana"},
 	{ kind: "Ornitorrinco"},
+	{ kind: "Andorinha"}
 ])
 
 kinds = AnimalKind.all

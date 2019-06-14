@@ -8,7 +8,7 @@
 			      <th scope="col">Name</th>
 			      <th scope="col">Document</th>
 			      <th scope="col">Date of Birth</th>
-			      <th scope="col">Animails</th>
+			      <th scope="col">Animals</th>
 			      <th scope="col">Monthly Cost</th>
 			    </tr>
 			  </thead>
@@ -19,7 +19,7 @@
 				      <td><%= person.name %></td>
 				      <td><%= person.document %></td>
 				      <td><%= person.date_of_birth %></td>
-				      <td><%= person.animals.count %></td>
+				      <td><%= person.animals_name(person) %></td>
 				      <td><%= person.animals_sum(person) %></td>
 				    </tr>
 				  <% end %>
@@ -27,23 +27,36 @@
 			</table>
 		</div>
 	</div>
-	<div class="row bg-warning">
-		<div class="col-sm-12">
+	<div class="row bg-warning p-3">
+		<div class="col-sm-8 offset-sm-2 bg-white rounded">
 			<%= simple_form_for @animal do |f| %>
 				<%= f.input :person_id, collection: @people, prompt: "Select your person", label: "Owner" %>
 				<%= f.input :name, label: "Animal name" %>
 				<%= f.input :monthly_cost, label: "Monthly cost", as: :decimal %>
 				<%= f.input :animal_kind_id, collection: @animal_kinds, label_method: :kind, prompt: "Select the animal type", label: "Animal type" %>
-				<%= f.submit %>
+				<%= f.submit "Save", class: "mb-2 btn btn-outline-warning" %>
 			<% end %>
 		</div>
 	</div>
-	<div class="row bg-success">
-		<div class="col-sm-12">
-			<h3>Need create more animals kind?</h3>
+	
+	<div class="row bg-danger p-3">
+		<div class="col-sm-8 offset-sm-2 bg-white rounded">
+			<p>Need create more people?</p>
+			<%= simple_form_for @person do |f| %>
+				<%= f.input :name %>
+				<%= f.input :document %>
+				<%= f.input :date_of_birth %>
+				<%= f.submit class: "mb-2 btn btn-outline-danger" %>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="row bg-success p-3">
+		<div class="col-sm-8 offset-sm-2 bg-white rounded">
+			<p>Need create more animals kind?</p>
 			<%= simple_form_for @animal_kind do |f| %>
 				<%= f.input :kind %>
-				<%= f.submit :kind %>
+				<%= f.submit class: "mb-2 btn btn-outline-success" %>
 			<% end %>
 		</div>
 	</div>

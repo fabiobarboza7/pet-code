@@ -41,19 +41,12 @@ Inclua os trechos de código que respondem as perguntas abaixo:
 
 ### Retorne as pessoas ordenando pelo custo que elas tem com os animais (Maior para menor)
 
-    Person.all.map do |person|
-      person.animals.order(monthly_cost: :desc)
-    end
+    Person.joins(:animals).select("people.*, SUM(animals.monthly_cost)").group("people.id").order('sum desc')
+
+    !Esta query eu tive um pouquinho de dificuldade, deu uma olhada na net.
 
 ### Levando em consideração o custo mensal, qual será o custo de 3 meses de cada pessoa?
 
     Person.all.map do |person|
       person.animals.sum("monthly_cost * 3").to_f
     end
-
-# Entrega do projeto
-
-- Crie uma aplicação Rails nova para executar o desafio. Pode escolher o banco de dados de preferência.
-- Ao finalizar, suba a sua proposta para o projeto que você criou no GitHub. Exemplo: https://github.com/seuNome/pet-code;
-- Envie-nos o link do projeto. Exemplo: https://github.com/seuNome/test-backend-ruby.git
-- Pronto! Basta aguardar o nosso RH entrar em contato. Entramos em contato rapidinho ;)

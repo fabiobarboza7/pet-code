@@ -2,6 +2,7 @@ class Animal < ApplicationRecord
   belongs_to :animal_kind
   belongs_to :person
   before_save :check_animal_kind
+  before_save :check_cost
 
   def check_animal_kind
   	case self.animal_kind.kind

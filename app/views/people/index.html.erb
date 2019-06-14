@@ -1,7 +1,31 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12">
-			<%=  %>
+			<table class="table table-striped">
+			  <thead>
+			    <tr>
+			      <th scope="col">#id</th>
+			      <th scope="col">Name</th>
+			      <th scope="col">Document</th>
+			      <th scope="col">Date of Birth</th>
+			      <th scope="col">Animails</th>
+			      <th scope="col">Monthly Cost</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	<% @people.each do |person| %>
+				    <tr>
+				      <th scope="row"><%= person.id %></th>
+				      <td><%= person.name %></td>
+				      <td><%= person.document %></td>
+				      <td><%= person.date_of_birth %></td>
+				      <td><%= person.animals.count %></td>
+				      <!-- Gonna refactory!! Cuz queries in views isn't good practice -->
+				      <td><%= person.animals.sum(:monthly_cost).to_f %></td>
+				    </tr>
+				  <% end %>
+			  </tbody>
+			</table>
 		</div>
 	</div>
 </div>

@@ -2,7 +2,7 @@ class AnimalsController < ApplicationController
 
 	def create
 		@animal = Animal.new(animal_params)
-		if @animal.save!
+		if @animal.save
 			flash[:notice] = "Success save :)"
 		else
 			flash[:alert] = "Some error, check the fields"

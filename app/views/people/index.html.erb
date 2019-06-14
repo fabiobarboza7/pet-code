@@ -1,5 +1,5 @@
-<div class="container">
-	<div class="row">
+<div class="container-fluid">
+	<div class="row bg-light">
 		<div class="col-sm-12">
 			<table class="table table-striped">
 			  <thead>
@@ -20,15 +20,14 @@
 				      <td><%= person.document %></td>
 				      <td><%= person.date_of_birth %></td>
 				      <td><%= person.animals.count %></td>
-				      <!-- Gonna refactory!! Cuz queries in views isn't good practice -->
-				      <td><%= person.animals.sum(:monthly_cost).to_f %></td>
+				      <td><%= person.animals_sum(person) %></td>
 				    </tr>
 				  <% end %>
 			  </tbody>
 			</table>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row bg-warning">
 		<div class="col-sm-12">
 			<%= simple_form_for @animal do |f| %>
 				<%= f.input :person_id, collection: @people, prompt: "Select your person", label: "Owner" %>
@@ -36,6 +35,15 @@
 				<%= f.input :monthly_cost, label: "Monthly cost", as: :decimal %>
 				<%= f.input :animal_kind_id, collection: @animal_kinds, label_method: :kind, prompt: "Select the animal type", label: "Animal type" %>
 				<%= f.submit %>
+			<% end %>
+		</div>
+	</div>
+	<div class="row bg-success">
+		<div class="col-sm-12">
+			<h3>Need create more animals kind?</h3>
+			<%= simple_form_for @animal_kind do |f| %>
+				<%= f.input :kind %>
+				<%= f.submit :kind %>
 			<% end %>
 		</div>
 	</div>

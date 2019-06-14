@@ -15,18 +15,19 @@ class Animal < ApplicationRecord
   	end	
   end
 
+  private
+  
   def check_cost
-  	self.person.animals.sum(:monthly_cost).to_f <= 1000.00 ? true : false
+  	self.person.animals.sum(:monthly_cost).to_f <= 1000.00 ? true : throw(:abort)
   end
 
-  private
-
   def check_age_for_bird
-		(self.person.date_of_birth + 18.years) < Date.today ? true : false
+		(self.person.date_of_birth + 18.years) < Date.today ? true : throw(:abort)
   end
 
   def check_name
-  	self.person.name.first.downcase === "a" ? false : true
+  	self.person.name.first.downcase === "a" ? throw(:abort) : true
+
   end
 
 end

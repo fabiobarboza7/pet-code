@@ -28,4 +28,15 @@
 			</table>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<%= simple_form_for @animal do |f| %>
+				<%= f.input :person_id, collection: @people, prompt: "Select your person", label: "Owner" %>
+				<%= f.input :name, label: "Animal name" %>
+				<%= f.input :monthly_cost, label: "Monthly cost", as: :decimal %>
+				<%= f.input :animal_kind_id, collection: @animal_kinds, label_method: :kind, prompt: "Select the animal type", label: "Animal type" %>
+				<%= f.submit %>
+			<% end %>
+		</div>
+	</div>
 </div>
